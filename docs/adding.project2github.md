@@ -36,7 +36,13 @@ git config --global user.name "Alexandr"
 
 ```bash
 git add .
-# Adds the files in the local repository and stages them for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
+git commit -m 'First commit'
+# Adds the files in the local repository and stages them for commit. .
+```
+
+### To unstage a file use: 
+```bash
+git reset HEAD YOUR-FILE
 ```
 
 ### Set the repository remote url 
