@@ -9,6 +9,12 @@
 
 #### Create local branch from remote
 
+**Note**: creation from a remote branch makes only sense if you are going to push into the same remote branch.
+As a result, to make it more clear, it makes sense to name both remote and local branches in the same way.
+
+If you want to copy one branch, apply changes and push into another remote one, 
+create your local branch from another local one, but not from a remote.
+
 ```bash
 git checkout -b ${localBranchName} remotes/origin/${remoteBranchName}
 ```
@@ -24,6 +30,30 @@ $ git checkout -b newLocalBranchName remotes/origin/someRemoteBranch
 ```
 
 [How to cleanly get/copy a remote git branch to local repository](https://stackoverflow.com/questions/11356460/how-to-cleanly-get-copy-a-remote-git-branch-to-local-repository)
+
+#### What happens if you create a local branch from a remote one and try to push into another remote?
+
+```bash
+$ git branch -a
+* TO_BRANCH
+  remotes/origin/TO_BRANCH
+
+$ git checkout -b FROM_BRANCH remotes/origin/TO_BRANCH
+Branch 'FROM_BRANCH' set up to track remote branch 'TO_BRANCH' from 'origin'.
+Switched to a new branch 'FROM_BRANCH'
+
+$ git push -u origin remotes/origin/FROM_BRANCH
+error: src refspec remotes/origin/FROM_BRANCH does not match any
+error: failed to push some refs to 'git@github.com:AlexandrSokolov/git_test.git'
+
+$ git branch -vv
+* FROM_BRANCH d64c99c [origin/TO_BRANCH] Initial commit
+  TO_BRANCH   d64c99c [origin/TO_BRANCH] Initial commit
+```
+
+In this example you try to push into another remote `FROM_BRANCH` branch, but it does not exist.
+You local branch was copied from the remote, as a result both local branches refer to the same `origin/TO_BRANCH` remote.
+
 
 #### Create local branch from the current local one
 
@@ -49,6 +79,8 @@ $ git remote show origin
 [Find out which remote branch a local branch is tracking](https://stackoverflow.com/questions/171550/find-out-which-remote-branch-a-local-branch-is-tracking)
 
 #### Connect a local branch to the remote
+
+Works, only if you created your local branch, not from another remote one.
 
 ```bash
 $ git branch -vv
