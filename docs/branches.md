@@ -1,6 +1,7 @@
 * List of local branches: `$ git branch`
 * List of all branches including remote `$ git branch -a`
 * [Create local branch from remote](#create-local-branch-from-remote)
+* [Create local branch from remote from specific commit](#create-local-branch-from-remote-from-specific-commit)
 * [Create local branch from the current local one](#create-local-branch-from-the-current-local-one)
 * [Find a remote branch tracked connected to local](#find-a-remote-branch-tracked-by-local)
 * [Connect a local branch to the remote](#connect-a-local-branch-to-the-remote)
@@ -54,6 +55,38 @@ $ git branch -vv
 In this example you try to push into another remote `FROM_BRANCH` branch, but it does not exist.
 You local branch was copied from the remote, as a result both local branches refer to the same `origin/TO_BRANCH` remote.
 
+### Create local branch from remote from specific commit
+
+1. Identify the Commit ID: Ensure that you have the commit ID you want to create the new branch from.
+
+  In IntellijIDEA, right click on the commit and choose `Copy revision number`.
+  Commit ID looks as: `96deb096f3ab0f0267b71776689bc31706623318`
+
+2. Checkout the `${commitId}` commit to the new `${localBranchName}` local branch:
+
+```bash
+git checkout -b ${localBranchName} ${commitId}
+```
+
+3. Create a remote branch based on your new local branch:
+```bash
+$ git push -u origin BMSUPPORT-34204_sftp_timeout
+```
+
+Example:
+```bash
+$ git branch -a | grep sftp
+$ git branch
+* develop
+$ git checkout -b BMSUPPORT-34204_sftp_timeout 96deb096f3ab0f0267b71776689bc31706623318
+Switched to a new branch 'BMSUPPORT-34204_sftp_timeout'
+$ git branch
+* BMSUPPORT-34204_sftp_timeout
+  develop
+$ git push -u origin BMSUPPORT-34204_sftp_timeout
+$ git branch -vv
+* BMSUPPORT-34204_sftp_timeout 96deb09 [origin/BMSUPPORT-34204_sftp_timeout] Solving deletion problem
+```
 
 #### Create local branch from the current local one
 
