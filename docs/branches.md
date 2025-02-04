@@ -88,6 +88,31 @@ $ git branch -vv
 * BMSUPPORT-34204_sftp_timeout 96deb09 [origin/BMSUPPORT-34204_sftp_timeout] Solving deletion problem
 ```
 
+Note: you might meet the error:
+```bash
+git push -u origin ...
+remote: You are not allowed to push code to this project.
+fatal: unable to access
+returned error: 403
+```
+Check the connection string:
+```bash
+$ git remote -vv
+origin	git@... (fetch)
+origin	git@... (push)
+```
+Make sure it starts with `git@`, but not with `https`:
+```bash
+$ git remote -vv
+origin	https://... (fetch)
+origin	https://... (push)
+```
+Update the connection to:
+```bash
+git remote set-url origin git@...
+```
+
+
 #### Create local branch from the current local one
 
 ```bash
