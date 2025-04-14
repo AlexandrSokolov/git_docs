@@ -28,9 +28,38 @@ The commit into `TO_BRANCH`, that is not known in `FROM_BRANCH` yet:
 Now we want to merge changes applied in `FROM_BRANCH` (commits #3 and #4) into `TO_BRANCH`
 
 We have the following options:
+- [Merge single commit with Cherry-Pick](#merge-single-commit-with-cherry-pick)
 - [Merge all commits from `FROM_BRANCH` into `TO_BRANCH`](#merge-all-commits-from-frombranch-into-tobranch)
 - [Rebase `TO_BRANCH` from `FROM_BRANCH`](#rebase-tobranch-from-frombranch)
 - [What’s the Difference Between Merge and Rebase?](#)
+
+
+#### Merge single commit with Cherry-Pick
+
+1. Identify the Commit on the Source Branch (`master` in our case):
+    ```bash
+    $ git log master
+    
+    commit fb15d63b4e319141a187532aeb31d54a6ebf823d (HEAD -> master, origin/master)
+    Author: ...
+    Date:   ...
+    
+        the commit message
+    ```
+2. Checkout the Target Branch (`dev` in our case)
+    ```bash
+    $ git checkout dev
+    ```
+3. Cherry-Pick the Commit
+    ```bash
+    git cherry-pick fb15d63b4e319141a187532aeb31d54a6ebf823d
+    ```
+4. Resolve Conflicts (if any)
+   - Resolve Conflicts: Edit the conflicted files to resolve the issues.
+   - Stage the Resolved Files: `git add <resolved-file>`
+   - Continue Cherry-Pick: `git cherry-pick --continue`
+   - If you want to abort the cherry-pick process: `git cherry-pick --abort`
+5. Commit and push
 
 #### Merge all commits from `FROM_BRANCH` into `TO_BRANCH`
 
