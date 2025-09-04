@@ -2,3 +2,4 @@
 * [Working with git branches](docs/branches.md)
 * [Branches and single commits merging](docs/merging.md)
 * [Controlling files in git](docs/files.md)
+* [Multiple ssh accounts for different git repositories](docs/multiple.ssh.accounts4git.repositories.md)
