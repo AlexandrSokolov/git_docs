@@ -3,6 +3,7 @@
 * [Create local branch from remote](#create-local-branch-from-remote)
 * [Create local branch from remote from specific commit](#create-local-branch-from-remote-from-specific-commit)
 * [Create local branch from the current local one](#create-local-branch-from-the-current-local-one)
+* [Create local branch from the current local with all existing, uncommitted work](#create-local-branch-from-the-current-local-with-all-existing-uncommitted-work)
 * [Find a remote branch tracked connected to local](#find-a-remote-branch-tracked-by-local)
 * [Connect a local branch to the remote](#connect-a-local-branch-to-the-remote)
 * [Switch between branches](#switch-between-branches)
@@ -29,6 +30,8 @@ $ git branch -a
 
 $ git checkout -b newLocalBranchName remotes/origin/someRemoteBranch
 ```
+
+Notes: `git checkout -b` is the same as `git co -b`
 
 [How to cleanly get/copy a remote git branch to local repository](https://stackoverflow.com/questions/11356460/how-to-cleanly-get-copy-a-remote-git-branch-to-local-repository)
 
@@ -122,6 +125,22 @@ $ git branch
 * develop
 $ git checkout -b ${newLocalBranchName}
 ```
+
+#### Create local branch from the current local with all existing, uncommitted work
+
+`git checkout -b <BranchName>` command will create a new branch and switch to it. 
+Moreover, this command will **leave the current branch as it is and bring all uncommitted changes to the new branch**.
+```bash
+$ git branch
+  someBranch1
+  someBranch2
+* develop
+$ git checkout -b ${newLocalBranchName}
+```
+
+[You might need to connect new local branch with a new remote](#connect-a-local-branch-to-the-remote)
+
+Notes: `git checkout -b` is the same as `git co -b`
 
 #### Find a remote branch tracked by local
 
