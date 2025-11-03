@@ -52,7 +52,7 @@
 
     Note: this step might be not required. On the system multiple ssh accounts function correctly without having this file.
     
-    Create `~/.ssh/config` with the following content:
+    Create [`~/.ssh/config`](files/git.config) with the following content:
     ```
     #asokolov private account on github.com
     Host github.com
