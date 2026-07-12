@@ -1,11 +1,7 @@
-
-## Multiple ssh accounts for different git repositories
+## Multiple ssh accounts for different git repositories on Linux
 
 ### 1. Generate rsa key, one key per git repository (GitHub, GitLab):
 
-The `ssh-keygen` command is identical on every platform — only the output path passed to `-f` differs.
-
-#### Linux
 ```bash
 ssh-keygen -t rsa -b 4096 -C "${email}" -f /home/${user}/.ssh/id_rsa_gitlab
 ls -al ~/.ssh
@@ -30,47 +26,15 @@ ls -al ~/.ssh
 -rw-r--r--  1 alex alex  753 Aug 29 20:46 id_rsa_gitlab.pub
 ```
 
-#### macOS
-Same command, home dir lives under `/Users/`:
-```bash
-ssh-keygen -t rsa -b 4096 -C "sav.public@yandex.com" -f /Users/alex/.ssh/id_rsa_github
-ls -al ~/.ssh
-```
-
-#### Windows
-Run in PowerShell (OpenSSH is built in on Windows 10 1809+ / 11). Home dir is `C:\Users\<user>`;
-`~` resolves to it in PowerShell:
-```powershell
-ssh-keygen -t rsa -b 4096 -C "sav.public@yandex.com" -f $env:USERPROFILE\.ssh\id_rsa_github
-Get-ChildItem ~\.ssh
-```
-In cmd, use `%USERPROFILE%` instead of `$env:USERPROFILE`, and `dir %USERPROFILE%\.ssh` to list.
-
 ### 2. Upload the generated rsa public keys to your git account configuration.
 
 Copy the **public** key (`.pub`) to the clipboard, then paste it into your git host's SSH-keys page.
-Only the copy command is platform-specific; the login, upload, and connection test are the same everywhere.
 
-#### Linux
 ```bash
 xclip -sel clip < ~/.ssh/id_rsa_bm_gitlab.pub   # X11; on Wayland use: wl-copy < ~/.ssh/id_rsa_bm_gitlab.pub
 ```
 
-#### macOS
-```bash
-   pbcopy < ~/.ssh/id_rsa_github.pub
-```
-
-#### Windows
-```powershell
-Get-Content ~\.ssh\id_rsa_github.pub | clip      # PowerShell
-```
-In cmd: 
-```cmd
-clip < %USERPROFILE%\.ssh\id_rsa_github.pub`
-```
-
-Then, on every platform:
+Then:
 
 - **GitLab** — [Login](https://gitlab.dev.brandmaker.com) as `alexandr.sokolov` with your domain password and
   VPN enabled. Install `id_rsa_bm_gitlab.pub` into
